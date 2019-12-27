@@ -1,28 +1,25 @@
-import React, { Component } from "react";
+import React from "react";
+import { Typography } from "@material-ui/core";
+import { CredentialsForm, LinkText } from "components";
+import SignInSignUpLayout from "./SignInSignUpLayout";
 
-import { Logo, SignIn } from "components";
+function LoginPage() {
+  return (
+    <SignInSignUpLayout>
+      <Typography variant='h4' gutterBottom>
+        Welcome back!
+      </Typography>
 
-import { Container } from "@material-ui/core";
-
-export class LoginPage extends Component {
-  render() {
-    return (
-      <>
-        <Container
-          maxWidth={false}
-          style={{
-            backgroundColor: "#EFF0F2",
-            width: "100vw",
-            minHeight: "100vh",
-            paddingTop: 1
-          }}
-        >
-          <Logo />
-          <SignIn />
-        </Container>
-      </>
-    );
-  }
+      <CredentialsForm buttonText='Sign in' />
+      <LinkText onClick={() => {}} linkText='Forgot Password!' link='signup' />
+      <LinkText
+        onClick={() => {}}
+        text="Don't have account?"
+        linkText='Sign Up'
+        link='signup'
+      />
+    </SignInSignUpLayout>
+  );
 }
 
 export default LoginPage;

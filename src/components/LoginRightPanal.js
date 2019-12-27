@@ -1,18 +1,28 @@
-import React, { Component } from "react";
+import React from "react";
 
-import SocialLogin from "./SocialLogin";
+import { Facebook, Block } from "@material-ui/icons";
+
+import Button from "./Button";
 import PrivacyPolicy from "./PrivacyPolicy";
 
-class LoginRightPanal extends Component {
-  render() {
-    return (
-      <>
-        <PrivacyPolicy />
-        <SocialLogin facebook />
-        <SocialLogin google />
-      </>
-    );
-  }
-}
+const LoginRightPanal = () => {
+  return (
+    <>
+      <PrivacyPolicy />
+      <Button
+        text='Continue with Facebook'
+        icon={<Facebook fontSize='large' />}
+        color='#304D8A'
+        hover='#2d4373'
+      />
+      <Button
+        text='Continue with Google'
+        icon={<Block fontSize='large' />}
+        color='#2A75F3'
+        hover='#0062cc'
+      />
+    </>
+  );
+};
 
 export default LoginRightPanal;

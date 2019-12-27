@@ -1,37 +1,35 @@
-import React, { Component } from "react";
+import React from "react";
 
 import { Box, Typography } from "@material-ui/core";
-import AccountBalanceWalletOutlinedIcon from "@material-ui/icons/AccountBalanceWalletOutlined";
+import { AccountBalanceWalletOutlined } from "@material-ui/icons";
 
-export class LoginPage extends Component {
-  render() {
-    return (
+const LoginPage = () => {
+  return (
+    <Box
+      component='span'
+      m={1}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+      }}
+    >
+      <AccountBalanceWalletOutlined style={{ fontSize: 70 }} />
       <Box
         component='span'
         m={1}
         style={{
           display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
+          flexDirection: "column"
         }}
       >
-        <AccountBalanceWalletOutlinedIcon style={{ fontSize: 70 }} />
-        <Box
-          component='span'
-          m={1}
-          style={{
-            display: "flex",
-            flexDirection: "column"
-          }}
-        >
-          <Typography variant='h4' style={{ fontWeight: 600 }}>
-            Wallet
-          </Typography>
-          <Typography variant='body1'>by budgetbakers</Typography>
-        </Box>
+        <Typography variant='h4' style={{ fontWeight: 600 }}>
+          Wallet
+        </Typography>
+        <Typography variant='body1'>by budgetbakers</Typography>
       </Box>
-    );
-  }
-}
+    </Box>
+  );
+};
 
 export default LoginPage;
