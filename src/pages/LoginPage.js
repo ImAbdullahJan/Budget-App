@@ -11,12 +11,12 @@ function LoginPage() {
       </Typography>
 
       <CredentialsForm buttonText='Sign in' />
-      <LinkText onClick={() => {}} linkText='Forgot Password!' link='signup' />
+      <LinkText onClick={() => {}} linkText='Forgot Password!' to='signup' />
       <LinkText
         onClick={() => {}}
         text="Don't have account?"
         linkText='Sign Up'
-        link='signup'
+        to='signup'
       />
     </SignInSignUpLayout>
   );

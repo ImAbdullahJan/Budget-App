@@ -5,6 +5,7 @@ import { CssBaseline } from "@material-ui/core";
 
 import LoginPage from "./LoginPage";
 import SignUpPage from "./SignUpPage";
+import AccountsPage from "./AccountsPage";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <Switch>
         <Route exact path='/login' component={LoginPage} />
         <Route exact path='/signup' component={SignUpPage} />
-        <Route component={LoginPage} />
+        <Route exact path='/' component={AccountsPage} />
       </Switch>
     </>
   );

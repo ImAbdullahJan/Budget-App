@@ -19,7 +19,7 @@ function SignUpPage() {
         onClick={() => {}}
         text='Already have an account?'
         linkText='Sign In '
-        link='signin '
+        to='login'
       />
     </SignInSignUpLayout>
   );
