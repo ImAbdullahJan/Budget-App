@@ -37,17 +37,31 @@ const menuList = [
   {
     id: 0,
     name: "Upgrade",
-    icon: <StarBorderOutlined fontSize='small' style={{ marginRight: 15 }} />
+    icon: (
+      <StarBorderOutlined
+        color='primary'
+        fontSize='small'
+        style={{ marginRight: 15 }}
+      />
+    )
   },
   {
     id: 1,
     name: "Setting",
-    icon: <SettingsOutlined fontSize='small' style={{ marginRight: 15 }} />
+    icon: (
+      <SettingsOutlined
+        color='primary'
+        fontSize='small'
+        style={{ marginRight: 15 }}
+      />
+    )
   },
   {
     id: 2,
     name: "Log out",
-    icon: <ExitToApp fontSize='small' style={{ marginRight: 15 }} />
+    icon: (
+      <ExitToApp color='primary' fontSize='small' style={{ marginRight: 15 }} />
+    )
   }
 ];
 
@@ -91,7 +105,12 @@ function NavBar() {
             ))}
           </Box>
           <Box component='div'>
-            <Chip size='small' icon={<Add />} label='Record' color='primary' />
+            <Chip
+              size='small'
+              icon={<Add style={{ color: "#ffffff" }} />}
+              label='Record'
+              style={{ backgroundColor: "#006EE6", color: "#ffffff" }}
+            />
           </Box>
           <Box
             component='span'

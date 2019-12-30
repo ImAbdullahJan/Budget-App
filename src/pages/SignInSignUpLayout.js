@@ -36,7 +36,6 @@ function SignInSignUpLayout({ classes, children }) {
       maxWidth={false}
       style={{
         backgroundColor: "#EFF0F2",
-        width: "100vw",
         minHeight: "100vh",
         paddingTop: 10,
         paddingBottom: 10
