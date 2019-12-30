@@ -84,7 +84,7 @@ function AccountsPage() {
   return (
     <>
       <NavBar />
-      <Box bgcolor='#EFF0F2' px={2} py={2} height='87vh'>
+      <Box bgcolor='#EFF0F2' p={2} height='87vh'>
         <Grid container>
           <Grid item xs={12}>
             <Box

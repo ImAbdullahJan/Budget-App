@@ -1,6 +1,12 @@
 import React from "react";
 
-import { withStyles, TextField, MenuItem } from "@material-ui/core";
+import {
+  withStyles,
+  TextField,
+  MenuItem,
+  FormControl,
+  Select
+} from "@material-ui/core";
 
 const styles = theme => ({
   root: {
@@ -15,18 +21,43 @@ const styles = theme => ({
 });
 
 function InputSelect({ classes, options }) {
-  const [currency, setCurrency] = React.useState(10);
+  const [items, setItems] = React.useState(10);
 
   const handleChange = event => {
-    setCurrency(event.target.value);
+    setItems(event.target.value);
   };
   return (
     <>
-      <TextField
-        id='outlined-select-currency'
+      <FormControl variant='outlined' classes={classes}>
+        <Select
+          id='demo-simple-select'
+          value={items}
+          onChange={handleChange}
+          margin='dense'
+          MenuProps={{
+            anchorOrigin: {
+              vertical: "bottom",
+              horizontal: "left"
+            },
+            transformOrigin: {
+              vertical: "top",
+              horizontal: "left"
+            },
+            getContentAnchorEl: null
+          }}
+        >
+          {options.map(option => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      {/* <TextField
+        id='outlined-select-items'
         select
         classes={classes}
-        value={currency}
+        value={items}
         onChange={handleChange}
         variant='outlined'
         size='small'
@@ -36,7 +67,7 @@ function InputSelect({ classes, options }) {
             {option.label}
           </MenuItem>
         ))}
-      </TextField>
+      </TextField> */}
     </>
   );
 }

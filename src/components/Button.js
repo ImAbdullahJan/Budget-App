@@ -30,7 +30,6 @@ function Button({ fullWidth, icon, classes, text }) {
     <MuiButton
       fullWidth={fullWidth}
       variant='contained'
-      size='large'
       startIcon={icon}
       classes={classes}
     >
