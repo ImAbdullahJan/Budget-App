@@ -76,7 +76,7 @@ function AccountsPage() {
   return (
     <>
       <NavBar />
-      <Box bgcolor='#EFF0F2' p={2} height='87vh'>
+      <Box bgcolor='#EFF0F2' p={2}>
         <Grid container>
           <Grid item xs={12}>
             <Box
@@ -94,11 +94,17 @@ function AccountsPage() {
             </Box>
           </Grid>
         </Grid>
-        <Grid container spacing={4}>
+        <Grid container spacing={2}>
           <Grid item xs={3}>
-            <Box p={5} bgcolor='#FAFBFC' height='70vh' borderRadius={5}>
-              <Typography variant='h5' gutterBottom>
-                <Box fontWeight='fontWeightMedium' mb={3}>
+            <Box
+              bgcolor='#FAFBFC'
+              height='490px'
+              borderRadius={5}
+              px={3}
+              py={4}
+            >
+              <Typography variant='h5' component='div'>
+                <Box fontWeight='fontWeightBold' mb={3}>
                   Accounts
                 </Box>
               </Typography>
@@ -109,6 +115,7 @@ function AccountsPage() {
                 fullWidth
                 color='#00aa70'
                 hover='#00915f'
+                pb={4}
               />
 
               <Box bgcolor='#ffffff'>

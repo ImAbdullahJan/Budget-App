@@ -1,10 +1,8 @@
 import React from "react";
-
-import { withStyles } from "@material-ui/core";
-
 import { NavLink as RouterLink } from "react-router-dom";
 
 import {
+  withStyles,
   AppBar,
   Toolbar,
   IconButton,
@@ -90,7 +88,7 @@ function NavBar({ classes }) {
       <AppBar color='inherit' display='flex' elevation={0} position='relative'>
         <Toolbar>
           <IconButton>
-            <AccountBalanceWalletOutlined style={{ fontSize: 60 }} />
+            <AccountBalanceWalletOutlined style={{ fontSize: 50 }} />
           </IconButton>
 
           <Box component='nav' ml={3} flexGrow={1}>

@@ -1,7 +1,6 @@
 import React from "react";
 
-import { Box, Button as MuiButton } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles, Box, Button as MuiButton } from "@material-ui/core";
 
 const styles = {
   root: {
@@ -18,18 +17,16 @@ const styles = {
 
 function Button({ fullWidth, icon, classes, text, pb }) {
   return (
-    <>
-      <Box pb={pb}>
-        <MuiButton
-          fullWidth={fullWidth}
-          variant='contained'
-          startIcon={icon}
-          classes={classes}
-        >
-          {text}
-        </MuiButton>
-      </Box>
-    </>
+    <Box pb={pb}>
+      <MuiButton
+        fullWidth={fullWidth}
+        variant='contained'
+        startIcon={icon}
+        classes={classes}
+      >
+        {text}
+      </MuiButton>
+    </Box>
   );
 }
 

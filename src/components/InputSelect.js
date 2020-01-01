@@ -6,6 +6,7 @@ const styles = theme => ({
   root: {
     "& .MuiInputBase-root ": {
       width: 230,
+      fontSize: 14,
       backgroundColor: "#ffffff"
     },
     "& .MuiSelect-select:focus": {

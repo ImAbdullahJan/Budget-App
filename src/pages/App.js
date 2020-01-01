@@ -8,7 +8,7 @@ import SignUpPage from "./SignUpPage";
 import DashboardPage from "./DashboardPage";
 import AccountsPage from "./AccountsPage";
 import RecordsPage from "./RecordsPage";
-import AnalyticsPage from "./DashboardPage";
+import AnalyticsPage from "./AnalyticsPage";
 import ImportsPage from "./ImportsPage";
 
 function App() {
