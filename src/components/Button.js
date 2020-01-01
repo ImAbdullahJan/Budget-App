@@ -1,41 +1,40 @@
 import React from "react";
 
-import { Button as MuiButton } from "@material-ui/core";
+import { Box, Button as MuiButton } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
   root: {
-    marginBottom: 20,
     borderRadius: 27,
     color: "#fff",
     backgroundColor: props => props.color,
     textTransform: "capitalize",
-    "&:hover": {
-      color: "#fff",
-      backgroundColor: props => props.hover
-    },
-    "&:active": {
-      color: "#fff",
-      backgroundColor: props => props.hover
-    },
-    "&:focus": {
+    "&:hover, &:active, &:focus": {
       color: "#fff",
       backgroundColor: props => props.hover
     }
   }
 };
 
-function Button({ fullWidth, icon, classes, text }) {
+function Button({ fullWidth, icon, classes, text, pb }) {
   return (
-    <MuiButton
-      fullWidth={fullWidth}
-      variant='contained'
-      startIcon={icon}
-      classes={classes}
-    >
-      {text}
-    </MuiButton>
+    <>
+      <Box pb={pb}>
+        <MuiButton
+          fullWidth={fullWidth}
+          variant='contained'
+          startIcon={icon}
+          classes={classes}
+        >
+          {text}
+        </MuiButton>
+      </Box>
+    </>
   );
 }
+
+Button.defaultProps = {
+  pb: 3
+};
 
 export default withStyles(styles)(Button);
