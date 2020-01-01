@@ -1,12 +1,6 @@
 import React from "react";
 
-import {
-  withStyles,
-  TextField,
-  MenuItem,
-  FormControl,
-  Select
-} from "@material-ui/core";
+import { withStyles, MenuItem, FormControl, Select } from "@material-ui/core";
 
 const styles = theme => ({
   root: {
@@ -53,21 +47,6 @@ function InputSelect({ classes, options }) {
           ))}
         </Select>
       </FormControl>
-      {/* <TextField
-        id='outlined-select-items'
-        select
-        classes={classes}
-        value={items}
-        onChange={handleChange}
-        variant='outlined'
-        size='small'
-      >
-        {options.map(option => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
-      </TextField> */}
     </>
   );
 }

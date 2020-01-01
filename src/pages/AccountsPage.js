@@ -1,6 +1,6 @@
 import React from "react";
 
-import { withStyles, Box, Grid, Paper, Typography } from "@material-ui/core";
+import { Box, Grid, Paper, Typography } from "@material-ui/core";
 
 import { Add, CasinoOutlined } from "@material-ui/icons";
 
@@ -28,14 +28,6 @@ const sorting = [
     label: "Balance (Highest first)"
   }
 ];
-
-const styles = theme => ({
-  root: {
-    "& .MuiInputBase-root ": {
-      width: 200
-    }
-  }
-});
 
 const accounts = [
   {
@@ -178,4 +170,4 @@ function AccountsPage() {
   );
 }
 
-export default withStyles(styles)(AccountsPage);
+export default AccountsPage;

@@ -1,6 +1,8 @@
 import React from "react";
 
-import { Link as RouterLink } from "react-router-dom";
+import { withStyles } from "@material-ui/core";
+
+import { NavLink as RouterLink } from "react-router-dom";
 
 import {
   AppBar,
@@ -26,11 +28,10 @@ import {
 
 const navMenu = [
   { id: 0, name: "Dashboard", to: "/dashboard" },
-  { id: 1, name: "Accounts", to: "/Accounts" },
-  { id: 2, name: "Records", to: "/Records" },
-  { id: 3, name: "Analytics", to: "/Analytics" },
-  { id: 4, name: "Imports", to: "/Imports" },
-  { id: 5, name: "Wallet Life", to: "/wallet-life" }
+  { id: 1, name: "Accounts", to: "/accounts" },
+  { id: 2, name: "Records", to: "/records" },
+  { id: 3, name: "Analytics", to: "/analytics" },
+  { id: 4, name: "Imports", to: "/imports" }
 ];
 
 const menuList = [
@@ -65,7 +66,15 @@ const menuList = [
   }
 ];
 
-function NavBar() {
+const styles = {
+  root: {
+    "&.active, &:hover": {
+      fontWeight: "700"
+    }
+  }
+};
+
+function NavBar({ classes }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = event => {
@@ -92,13 +101,9 @@ function NavBar() {
                 key={menu.id}
                 component={RouterLink}
                 to={menu.to}
+                classes={classes}
               >
-                <Box
-                  component='span'
-                  fontWeight='fontWeightBold'
-                  fontSize={16}
-                  mr={3}
-                >
+                <Box component='span' fontSize={16} mr={3}>
                   {menu.name}
                 </Box>
               </Link>
@@ -124,14 +129,9 @@ function NavBar() {
           >
             <Avatar>H</Avatar>
 
-            <Link underline='none' color='textSecondary'>
-              <Box
-                fontWeight='fontWeightBold'
-                fontSize={15}
-                ml={1}
-                color='textSecondary'
-              >
-                email@gmail.com
+            <Link underline='none' color='textPrimary'>
+              <Box fontWeight='fontWeightBold' fontSize={15} ml={1}>
+                example@gmail.com
               </Box>
             </Link>
             <ArrowDropDown />
@@ -167,4 +167,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default withStyles(styles)(NavBar);
