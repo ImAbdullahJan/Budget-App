@@ -4,7 +4,13 @@ import { Box, Grid, Paper, Typography } from "@material-ui/core";
 
 import { Add, CasinoOutlined } from "@material-ui/icons";
 
-import { NavBar, Button, InputSearch, InputSelect } from "components";
+import {
+  NavBar,
+  Button,
+  InputSearch,
+  InputSelect,
+  AddAccountDialog
+} from "components";
 
 const sorting = [
   {
@@ -73,6 +79,15 @@ const accounts = [
 ];
 
 function AccountsPage() {
+  const [openDialog, setOpenDialog] = React.useState(false);
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
   return (
     <>
       <NavBar />
@@ -116,8 +131,14 @@ function AccountsPage() {
                 color='#00aa70'
                 hover='#00915f'
                 pb={4}
+                onClick={handleOpenDialog}
               />
-
+              {openDialog && (
+                <AddAccountDialog
+                  openDialog={openDialog}
+                  handleCloseDialog={handleCloseDialog}
+                />
+              )}
               <Box bgcolor='#ffffff'>
                 <InputSearch />
               </Box>

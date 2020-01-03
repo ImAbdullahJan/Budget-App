@@ -1,7 +1,7 @@
 import React from "react";
 import InputField from "./InputField";
 import Button from "./Button";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles, Box } from "@material-ui/core";
 
 const styles = {
   flexCenter: {
@@ -34,12 +34,16 @@ const styles = {
 function CredentialsForm({ prompt, buttonText }) {
   return (
     <form>
-      <InputField label='Email' />
-      <InputField label='Password' />
+      <Box mt={2}>
+        <InputField label='Email' />
+      </Box>
+      <Box mt={2}>
+        <InputField label='Password' />
+      </Box>
       {prompt}
-      <div style={{ marginTop: 25 }}>
+      <Box mt={3}>
         <Button text={buttonText} fullWidth color='#00aa70' hover='#00915f' />
-      </div>
+      </Box>
     </form>
   );
 }

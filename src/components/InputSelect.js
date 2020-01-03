@@ -5,7 +5,7 @@ import { withStyles, MenuItem, FormControl, Select } from "@material-ui/core";
 const styles = theme => ({
   root: {
     "& .MuiInputBase-root ": {
-      width: 230,
+      width: props => props.width,
       fontSize: 14,
       backgroundColor: "#ffffff"
     },
@@ -51,5 +51,9 @@ function InputSelect({ classes, options }) {
     </>
   );
 }
+
+InputSelect.defaultProps = {
+  width: 200
+};
 
 export default withStyles(styles)(InputSelect);

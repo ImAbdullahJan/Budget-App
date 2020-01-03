@@ -27,6 +27,7 @@ function InputSearch({ classes }) {
     <OutlinedInput
       margin='dense'
       placeholder='Search'
+      fullWidth
       classes={classes}
       startAdornment={
         <InputAdornment position='start'>

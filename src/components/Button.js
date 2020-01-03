@@ -15,7 +15,7 @@ const styles = {
   }
 };
 
-function Button({ fullWidth, icon, classes, text, pb }) {
+function Button({ fullWidth, icon, classes, text, pb, onClick }) {
   return (
     <Box pb={pb}>
       <MuiButton
@@ -23,6 +23,7 @@ function Button({ fullWidth, icon, classes, text, pb }) {
         variant='contained'
         startIcon={icon}
         classes={classes}
+        onClick={onClick}
       >
         {text}
       </MuiButton>

@@ -1,3 +1,4 @@
+export { default as AddAccountDialog } from "./AddAccountDialog";
 export { default as Button } from "./Button";
 export { default as CredentialsForm } from "./CredentialsForm";
 export { default as InputField } from "./InputField";

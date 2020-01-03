@@ -1,31 +1,34 @@
 import React from "react";
 
-import { withStyles, TextField, InputLabel } from "@material-ui/core";
+import { withStyles, Box, TextField, InputLabel } from "@material-ui/core";
 
 const styles = {
-  inputLable: {
-    marginTop: 18
-  },
   textField: {
-    marginTop: 9
+    marginTop: 8,
+    "& .MuiOutlinedInput-input": {
+      fontSize: 15
+    }
   }
 };
 
-function InputField({ label, classes }) {
+function InputField({ label, classes, fullWidth, placeholder }) {
   return (
-    <>
-      <InputLabel className={classes.inputLable} htmlFor={label}>
-        {label}
-      </InputLabel>
+    <Box component='span'>
+      <InputLabel htmlFor={label}>{label}</InputLabel>
       <TextField
         id={label}
-        fullWidth
+        fullWidth={fullWidth}
+        placeholder={placeholder}
         size='small'
         variant='outlined'
         className={classes.textField}
       />
-    </>
+    </Box>
   );
 }
+
+InputField.defaultProps = {
+  fullWidth: true
+};
 
 export default withStyles(styles)(InputField);
