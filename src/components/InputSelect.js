@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { withStyles, MenuItem, FormControl, Select } from "@material-ui/core";
 
@@ -15,19 +16,14 @@ const styles = theme => ({
   }
 });
 
-function InputSelect({ classes, options }) {
-  const [items, setItems] = React.useState(10);
-
-  const handleChange = event => {
-    setItems(event.target.value);
-  };
+function InputSelect({ classes, options, value, onChangeValue }) {
   return (
     <>
       <FormControl variant='outlined' classes={classes}>
         <Select
           id='demo-simple-select'
-          value={items}
-          onChange={handleChange}
+          value={value}
+          onChange={event => onChangeValue(event)}
           margin='dense'
           MenuProps={{
             anchorOrigin: {
@@ -54,6 +50,13 @@ function InputSelect({ classes, options }) {
 
 InputSelect.defaultProps = {
   width: 200
+};
+
+InputSelect.propTypes = {
+  classes: PropTypes.object,
+  options: PropTypes.array,
+  value: PropTypes.any.isRequired,
+  onChangeValue: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(InputSelect);
