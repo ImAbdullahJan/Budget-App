@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { withStyles, InputAdornment, OutlinedInput } from "@material-ui/core";
 
@@ -22,11 +23,13 @@ const styles = theme => ({
   notchedOutline: {}
 });
 
-function InputSearch({ classes }) {
+function InputSearch({ classes, value, onChangeValue }) {
   return (
     <OutlinedInput
       margin='dense'
       placeholder='Search'
+      value={value}
+      onChange={event => onChangeValue(event)}
       fullWidth
       classes={classes}
       startAdornment={
@@ -37,5 +40,11 @@ function InputSearch({ classes }) {
     />
   );
 }
+
+InputSearch.propTypes = {
+  classes: PropTypes.object,
+  value: PropTypes.any.isRequired,
+  onChangeValue: PropTypes.func.isRequired
+};
 
 export default withStyles(styles)(InputSearch);

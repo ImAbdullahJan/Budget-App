@@ -17,6 +17,7 @@ function InputField({
   classes,
   fullWidth,
   placeholder,
+  type,
   value,
   onChangeValue
 }) {
@@ -27,6 +28,7 @@ function InputField({
         id={label}
         fullWidth={fullWidth}
         placeholder={placeholder}
+        type={type}
         size='small'
         variant='outlined'
         className={classes.textField}
@@ -38,7 +40,8 @@ function InputField({
 }
 
 InputField.defaultProps = {
-  fullWidth: true
+  fullWidth: true,
+  type: "text"
 };
 
 InputField.propTypes = {
@@ -46,6 +49,7 @@ InputField.propTypes = {
   classes: PropTypes.object,
   fullWidth: PropTypes.bool.isRequired,
   placeholder: PropTypes.any,
+  type: PropTypes.string,
   value: PropTypes.any.isRequired,
   onChangeValue: PropTypes.func.isRequired
 };
