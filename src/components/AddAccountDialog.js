@@ -1,4 +1,5 @@
 import React from "react";
+import uuidv4 from "uuid/v4";
 
 import {
   withStyles,
@@ -12,63 +13,75 @@ import {
   DialogTitle
 } from "@material-ui/core";
 
-import CloseIcon from "@material-ui/icons/Close";
+import { Close as CloseIcon, CasinoOutlined } from "@material-ui/icons";
 
 import { InputField, InputSelect, Button } from "components";
 
 const accountType = [
   {
-    value: "10",
+    value: "Cash",
     label: "Cash"
   },
   {
-    value: "20",
+    value: "General",
     label: "General"
   },
   {
-    value: "30",
+    value: "Bank Account",
     label: "Bank Account"
   },
   {
-    value: "40",
+    value: "Credit Card",
     label: "Credit Card"
   },
   {
-    value: "50",
+    value: "Account with Overdraft",
     label: "Account with Overdraft"
   }
 ];
 
 const SelectColors = [
   {
-    value: "10",
+    value: "#f44336",
     label: "Red"
   },
   {
-    value: "20",
+    value: "#e91e63",
+    label: "Pink"
+  },
+  {
+    value: "#9c27b0",
+    label: "Purple"
+  },
+  {
+    value: "#2196f3",
     label: "Blue"
   },
   {
-    value: "30",
+    value: "#4caf50",
     label: "Green"
   },
   {
-    value: "40",
+    value: "#ffeb3b",
+    label: "Yellow"
+  },
+  {
+    value: "#ff9800",
     label: "Orange"
   },
   {
-    value: "50",
-    label: "Black"
+    value: "#9e9e9e",
+    label: "Grey"
   }
 ];
 
 const SelectCurrency = [
   {
-    value: "10",
+    value: "PKR",
     label: "PKR"
   },
   {
-    value: "20",
+    value: "$",
     label: "DOLLAR"
   }
 ];
@@ -76,13 +89,46 @@ const SelectCurrency = [
 const styles = theme => ({
   closeButton: {
     position: "absolute",
-    right: 8,
-    top: 8,
+    right: theme.spacing(1),
+    top: theme.spacing(1),
     color: "#9e9e9e"
   }
 });
 
-function AddAccountDialog({ classes, openDialog, handleCloseDialog }) {
+function AddAccountDialog({
+  classes,
+  openDialog,
+  handleCloseDialog,
+  onAddAccount
+}) {
+  const [state, setState] = React.useState({
+    id: "",
+    icon: <CasinoOutlined style={{ fontSize: "45px" }} />,
+    bgcolor: "#f44336",
+    name: "",
+    type: "Cash",
+    currency: "PKR",
+    balance: ""
+  });
+
+  const handleChange = prop => event => {
+    setState({ ...state, id: uuidv4(), [prop]: event.target.value });
+  };
+
+  const handleSave = data => {
+    onAddAccount(data);
+    setState({
+      id: "",
+      icon: <CasinoOutlined style={{ fontSize: "45px" }} />,
+      bgcolor: "#f44336",
+      name: "",
+      type: "Cash",
+      currency: "PKR",
+      balance: ""
+    });
+    handleCloseDialog();
+  };
+
   return (
     <Dialog
       open={openDialog}
@@ -111,7 +157,12 @@ function AddAccountDialog({ classes, openDialog, handleCloseDialog }) {
         <Box mt={1} px={3}>
           <Box my={2} display='flex'>
             <Box flexGrow={1}>
-              <InputField label='Name' placeholder='Account Name' />
+              <InputField
+                label='Name'
+                placeholder='Account Name'
+                value={state.name}
+                onChangeValue={handleChange("name")}
+              />
             </Box>
             <Box ml={2}>
               <Typography
@@ -123,7 +174,12 @@ function AddAccountDialog({ classes, openDialog, handleCloseDialog }) {
                   Color
                 </Box>
               </Typography>
-              <InputSelect options={SelectColors} width={100} />
+              <InputSelect
+                options={SelectColors}
+                width={100}
+                value={state.bgcolor}
+                onChangeValue={handleChange("bgcolor")}
+              />
             </Box>
           </Box>
 
@@ -133,12 +189,22 @@ function AddAccountDialog({ classes, openDialog, handleCloseDialog }) {
                 Account Type
               </Box>
             </Typography>
-            <InputSelect options={accountType} width={400} />
+            <InputSelect
+              options={accountType}
+              width={400}
+              value={state.type}
+              onChangeValue={handleChange("type")}
+            />
           </Box>
 
           <Box my={2} display='flex'>
             <Box flexGrow={1}>
-              <InputField label='Starting Amount' placeholder='0' />
+              <InputField
+                label='Starting Amount'
+                placeholder='0.00'
+                value={state.balance}
+                onChangeValue={handleChange("balance")}
+              />
             </Box>
             <Box ml={2}>
               <Typography
@@ -150,7 +216,12 @@ function AddAccountDialog({ classes, openDialog, handleCloseDialog }) {
                   Currency
                 </Box>
               </Typography>
-              <InputSelect options={SelectCurrency} width={100} />
+              <InputSelect
+                options={SelectCurrency}
+                width={100}
+                value={state.currency}
+                onChangeValue={handleChange("currency")}
+              />
             </Box>
           </Box>
 
@@ -170,6 +241,7 @@ function AddAccountDialog({ classes, openDialog, handleCloseDialog }) {
               color='#00aa70'
               hover='#00915f'
               pb={4}
+              onClick={() => handleSave(state)}
             />
           </Box>
         </Box>
