@@ -1,85 +1,54 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import _ from "lodash";
+
+import { accountsData, sortingArray } from "../api/fakeData";
 
 import { Box, Grid, Paper, Typography } from "@material-ui/core";
 
-import { Add, CasinoOutlined } from "@material-ui/icons";
+import { Add } from "@material-ui/icons";
 
-import {
-  NavBar,
-  Button,
-  InputSearch,
-  InputSelect,
-  AddAccountDialog
-} from "components";
-
-const sorting = [
-  {
-    value: "10",
-    label: "Default"
-  },
-  {
-    value: "20",
-    label: "A-Z"
-  },
-  {
-    value: "30",
-    label: "Z-A"
-  },
-  {
-    value: "40",
-    label: "Balance (Lowest first)"
-  },
-  {
-    value: "50",
-    label: "Balance (Highest first)"
-  }
-];
-
-const accounts = [
-  {
-    id: 0,
-    icon: <CasinoOutlined style={{ fontSize: "45px" }} />,
-    bgcolor: "#00897B",
-    name: "Account 1",
-    type: "Cash",
-    balance: "PKR 100.00"
-  },
-  {
-    id: 1,
-    icon: <CasinoOutlined style={{ fontSize: "45px" }} />,
-    bgcolor: "#4DB6AC",
-    name: "Account 2",
-    type: "General",
-    balance: "PKR 1,000.00"
-  },
-  {
-    id: 2,
-    icon: <CasinoOutlined style={{ fontSize: "45px" }} />,
-    bgcolor: "#64DD17",
-    name: "Account 3",
-    type: "Bank Account",
-    balance: "PKR 10,000.00"
-  },
-  {
-    id: 3,
-    icon: <CasinoOutlined style={{ fontSize: "45px" }} />,
-    bgcolor: "#FFB300",
-    name: "Account 4",
-    type: "Credit Card",
-    balance: "PKR 100,000.00"
-  },
-  {
-    id: 4,
-    icon: <CasinoOutlined style={{ fontSize: "45px" }} />,
-    bgcolor: "#64B5F6",
-    name: "Account 5",
-    type: "Account with Overdraft",
-    balance: "PKR 1,000,000.00"
-  }
-];
+import { Button, InputSearch, InputSelect, AddAccountDialog } from "components";
 
 function AccountsPage() {
-  const [openDialog, setOpenDialog] = React.useState(false);
+  const [accounts, setAccounts] = useState(accountsData);
+
+  const handleAddAccount = data => {
+    setAccounts([...accounts, data]);
+  };
+
+  // Filter Accounts with search field
+  const [searchText, setSearchText] = useState("");
+
+  const handleSearchText = event => {
+    setSearchText(event.target.value);
+  };
+
+  const filteredAccount = accounts.filter(
+    account =>
+      account.name.toLowerCase().indexOf(searchText.toLowerCase()) !== -1
+  );
+
+  // Sorting Select field logic
+
+  const [selectedItem, setSelectedItem] = useState("10");
+
+  const handleUpdateSorting = event => {
+    setSelectedItem(event.target.value);
+  };
+
+  const sortItem = sortingArray.find(item => item.value === selectedItem);
+  const [sortColumn, setSortColumn] = useState(sortItem.path);
+  const [sortOrder, setSortOrder] = useState(sortItem.order);
+
+  useEffect(() => {
+    setSortColumn(sortItem.path);
+    setSortOrder(sortItem.order);
+  }, [sortItem]);
+
+  const sortedAccount = _.orderBy(filteredAccount, sortColumn, sortOrder);
+
+  // Add Account Dialog box logic
+  const [openDialog, setOpenDialog] = useState(false);
 
   const handleOpenDialog = () => {
     setOpenDialog(true);
@@ -88,9 +57,11 @@ function AccountsPage() {
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
+
+  // Filter Accounts Logic
+
   return (
     <>
-      <NavBar />
       <Box bgcolor='#EFF0F2' p={2}>
         <Grid container>
           <Grid item xs={12}>
@@ -105,7 +76,11 @@ function AccountsPage() {
                   Sort by
                 </Box>
               </Typography>
-              <InputSelect options={sorting} />
+              <InputSelect
+                options={sortingArray}
+                value={selectedItem}
+                onChangeValue={handleUpdateSorting}
+              />
             </Box>
           </Grid>
         </Grid>
@@ -137,16 +112,20 @@ function AccountsPage() {
                 <AddAccountDialog
                   openDialog={openDialog}
                   handleCloseDialog={handleCloseDialog}
+                  onAddAccount={handleAddAccount}
                 />
               )}
               <Box bgcolor='#ffffff'>
-                <InputSearch />
+                <InputSearch
+                  value={searchText}
+                  onChangeValue={handleSearchText}
+                />
               </Box>
             </Box>
           </Grid>
 
           <Grid item xs={9}>
-            {accounts.map(item => (
+            {sortedAccount.map(item => (
               <Box borderRadius={5} mb={2} key={item.id}>
                 <Paper style={{ padding: 15 }} elevation={0}>
                   <Grid container alignItems='center'>
@@ -183,7 +162,7 @@ function AccountsPage() {
                     <Grid item xs={4}>
                       <Typography variant='body1' component='div'>
                         <Box fontSize={18} fontWeight={500} textAlign='right'>
-                          {item.balance}
+                          {item.currency} {item.balance}
                         </Box>
                       </Typography>
                     </Grid>
