@@ -9,11 +9,7 @@ import { Add } from "@material-ui/icons";
 
 import { Button, InputSearch, InputSelect, AddAccountDialog } from "components";
 
-function AccountsPage({ accounts, setAccounts }) {
-  const handleAddAccount = data => {
-    setAccounts([...accounts, data]);
-  };
-
+function AccountsPage({ accounts, onAddAccount }) {
   // Filter Accounts with search field
   const [searchText, setSearchText] = useState("");
 
@@ -110,7 +106,7 @@ function AccountsPage({ accounts, setAccounts }) {
                 <AddAccountDialog
                   openDialog={openDialog}
                   handleCloseDialog={handleCloseDialog}
-                  onAddAccount={handleAddAccount}
+                  onAddAccount={account => onAddAccount(account)}
                 />
               )}
               <Box bgcolor='#ffffff'>

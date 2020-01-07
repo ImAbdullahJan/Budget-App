@@ -8,7 +8,7 @@ import { NavBar } from "components";
 
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
-// import DashboardPage from "./pages/DashboardPage";
+import DashboardPage from "./pages/DashboardPage";
 import AccountsPage from "./pages/AccountsPage";
 import RecordsPage from "./pages/RecordsPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
@@ -31,7 +31,11 @@ function App() {
             <>
               <NavBar />
               <Switch>
-                <Route exact path={`${url}dashboard`} component={RecordsPage} />
+                <Route
+                  exact
+                  path={`${url}dashboard`}
+                  component={DashboardPage}
+                />
                 <Route
                   exact
                   path={`${url}accounts`}
@@ -39,7 +43,9 @@ function App() {
                     <AccountsPage
                       {...props}
                       accounts={accounts}
-                      setAccounts={setAccounts}
+                      onAddAccount={account =>
+                        setAccounts([...accounts, account])
+                      }
                     />
                   )}
                 />
