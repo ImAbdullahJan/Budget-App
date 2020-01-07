@@ -1,5 +1,6 @@
 import React from "react";
 import uuidv4 from "uuid/v4";
+import { accountType, SelectColors, SelectCurrency } from "../api/fakeData";
 
 import {
   withStyles,
@@ -16,75 +17,6 @@ import {
 import { Close as CloseIcon, CasinoOutlined } from "@material-ui/icons";
 
 import { InputField, InputSelect, Button } from "components";
-
-const accountType = [
-  {
-    value: "Cash",
-    label: "Cash"
-  },
-  {
-    value: "General",
-    label: "General"
-  },
-  {
-    value: "Bank Account",
-    label: "Bank Account"
-  },
-  {
-    value: "Credit Card",
-    label: "Credit Card"
-  },
-  {
-    value: "Account with Overdraft",
-    label: "Account with Overdraft"
-  }
-];
-
-const SelectColors = [
-  {
-    value: "#f44336",
-    label: "Red"
-  },
-  {
-    value: "#e91e63",
-    label: "Pink"
-  },
-  {
-    value: "#9c27b0",
-    label: "Purple"
-  },
-  {
-    value: "#2196f3",
-    label: "Blue"
-  },
-  {
-    value: "#4caf50",
-    label: "Green"
-  },
-  {
-    value: "#ffeb3b",
-    label: "Yellow"
-  },
-  {
-    value: "#ff9800",
-    label: "Orange"
-  },
-  {
-    value: "#9e9e9e",
-    label: "Grey"
-  }
-];
-
-const SelectCurrency = [
-  {
-    value: "PKR",
-    label: "PKR"
-  },
-  {
-    value: "$",
-    label: "DOLLAR"
-  }
-];
 
 const styles = theme => ({
   closeButton: {
