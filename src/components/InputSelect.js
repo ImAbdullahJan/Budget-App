@@ -38,8 +38,11 @@ function InputSelect({ classes, options, value, onChangeValue }) {
           }}
         >
           {options.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
+            <MenuItem
+              key={option.value || option.id}
+              value={option.value || option.id}
+            >
+              {option.label || option.name}
             </MenuItem>
           ))}
         </Select>
