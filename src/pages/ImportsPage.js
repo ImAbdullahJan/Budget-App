@@ -8,39 +8,15 @@ import { InputSelect, Button } from "components";
 
 const styles = theme => ({});
 
-const sorting = [
-  {
-    value: "10",
-    label: "Account 1"
-  },
-  {
-    value: "20",
-    label: "Account 2"
-  },
-  {
-    value: "30",
-    label: "Account 3"
-  },
-  {
-    value: "40",
-    label: "Account 4"
-  },
-  {
-    value: "50",
-    label: "Account 5"
-  }
-];
-
-function ImportsPage({ classes }) {
+function ImportsPage({ accounts }) {
   const [selectedItem, setSelectedItem] = useState("");
 
   const handleUpdateSorting = event => {
     setSelectedItem(event.target.value);
   };
+
   return (
     <>
-      {/* <NavBar /> */}
-
       <Box bgcolor='#EFF0F2' p={2}>
         <Grid container>
           <Grid item xs={12}>
@@ -57,7 +33,7 @@ function ImportsPage({ classes }) {
               </Typography>
 
               <InputSelect
-                options={sorting}
+                options={accounts}
                 value={selectedItem}
                 onChangeValue={handleUpdateSorting}
               />
