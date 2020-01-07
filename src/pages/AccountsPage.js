@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
 
-import { accountsData, sortingArray } from "../api/fakeData";
+import { sortingArray } from "../api/fakeData";
 
 import { Box, Grid, Paper, Typography } from "@material-ui/core";
 
@@ -9,9 +9,7 @@ import { Add } from "@material-ui/icons";
 
 import { Button, InputSearch, InputSelect, AddAccountDialog } from "components";
 
-function AccountsPage() {
-  const [accounts, setAccounts] = useState(accountsData);
-
+function AccountsPage({ accounts, setAccounts }) {
   const handleAddAccount = data => {
     setAccounts([...accounts, data]);
   };
