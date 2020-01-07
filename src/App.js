@@ -15,23 +15,6 @@ import AnalyticsPage from "./pages/AnalyticsPage";
 import ImportsPage from "./pages/ImportsPage";
 import NoMatchPage from "./pages/NoMatchPage";
 
-// function NestedRoute() {
-//   return (
-//     <>
-//       <NavBar />
-//       <Route exact path='/dashboard' component={RecordsPage} />
-//       <Route exact path='/accounts' component={AccountsPage} />
-//       <Route exact path='/records' component={RecordsPage} />
-//       <Route exact path='/analytics' component={AnalyticsPage} />
-//       <Route exact path='/imports' component={ImportsPage} />
-//       <Route exact path='/404' component={NoMatchPage} />
-//       <Route path='*'>
-//         <Redirect to='/404' />
-//       </Route>
-//     </>
-//   );
-// }
-
 function App() {
   const [accounts, setAccounts] = React.useState(accountsData);
 
@@ -47,34 +30,40 @@ function App() {
           render={({ match: { url } }) => (
             <>
               <NavBar />
-              <Route exact path={`${url}dashboard`} component={RecordsPage} />
-              <Route
-                exact
-                path={`${url}accounts`}
-                render={props => (
-                  <AccountsPage
-                    {...props}
-                    accounts={accounts}
-                    setAccounts={setAccounts}
-                  />
-                )}
-              />
-              <Route exact path={`${url}records`} component={RecordsPage} />
-              <Route exact path={`${url}analytics`} component={AnalyticsPage} />
-              <Route
-                exact
-                path={`${url}imports`}
-                render={props => <ImportsPage {...props} accounts={accounts} />}
-              />
-              <Route exact path='/404' component={NoMatchPage} />
-              <Route path='*'>
-                <Redirect to='/404' />
-              </Route>
+              <Switch>
+                <Route exact path={`${url}dashboard`} component={RecordsPage} />
+                <Route
+                  exact
+                  path={`${url}accounts`}
+                  render={props => (
+                    <AccountsPage
+                      {...props}
+                      accounts={accounts}
+                      setAccounts={setAccounts}
+                    />
+                  )}
+                />
+                <Route exact path={`${url}records`} component={RecordsPage} />
+                <Route
+                  exact
+                  path={`${url}analytics`}
+                  component={AnalyticsPage}
+                />
+                <Route
+                  exact
+                  path={`${url}imports`}
+                  render={props => (
+                    <ImportsPage {...props} accounts={accounts} />
+                  )}
+                />
+                <Route exact path='/404' component={NoMatchPage} />
+                <Route path='*'>
+                  <Redirect to='/404' />
+                </Route>
+              </Switch>
             </>
           )}
         />
-
-        {/* <Route path='/' component={NestedRoute} /> */}
       </Switch>
     </>
   );
