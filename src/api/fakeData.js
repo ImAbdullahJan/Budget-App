@@ -19,24 +19,6 @@ export const accountsData = [
     type: "General",
     currency: "PKR",
     balance: 1000
-  },
-  {
-    id: 2,
-    icon: <CasinoOutlined style={{ fontSize: "45px" }} />,
-    bgcolor: "#64DD17",
-    name: "B-Account 3",
-    type: "Bank Account",
-    currency: "PKR",
-    balance: 100
-  },
-  {
-    id: 3,
-    icon: <CasinoOutlined style={{ fontSize: "45px" }} />,
-    bgcolor: "#FFB300",
-    name: "Z-Account 4",
-    type: "Credit Card",
-    currency: "PKR",
-    balance: 100000
   }
 ];
 
@@ -70,5 +52,74 @@ export const sortingArray = [
     path: "balance",
     order: "desc",
     label: "Balance (Highest first)"
+  }
+];
+
+export const accountType = [
+  {
+    value: "Cash",
+    label: "Cash"
+  },
+  {
+    value: "General",
+    label: "General"
+  },
+  {
+    value: "Bank Account",
+    label: "Bank Account"
+  },
+  {
+    value: "Credit Card",
+    label: "Credit Card"
+  },
+  {
+    value: "Account with Overdraft",
+    label: "Account with Overdraft"
+  }
+];
+
+export const SelectColors = [
+  {
+    value: "#f44336",
+    label: "Red"
+  },
+  {
+    value: "#e91e63",
+    label: "Pink"
+  },
+  {
+    value: "#9c27b0",
+    label: "Purple"
+  },
+  {
+    value: "#2196f3",
+    label: "Blue"
+  },
+  {
+    value: "#4caf50",
+    label: "Green"
+  },
+  {
+    value: "#ffeb3b",
+    label: "Yellow"
+  },
+  {
+    value: "#ff9800",
+    label: "Orange"
+  },
+  {
+    value: "#9e9e9e",
+    label: "Grey"
+  }
+];
+
+export const SelectCurrency = [
+  {
+    value: "PKR",
+    label: "PKR"
+  },
+  {
+    value: "$",
+    label: "DOLLAR"
   }
 ];
