@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { withStyles, Box, Grid, Typography } from "@material-ui/core";
 
 import { FileCopy } from "@material-ui/icons";
 
-import { NavBar, InputSelect, Button } from "components";
+import { InputSelect, Button } from "components";
 
 const styles = theme => ({});
 
@@ -32,9 +32,14 @@ const sorting = [
 ];
 
 function ImportsPage({ classes }) {
+  const [selectedItem, setSelectedItem] = useState("");
+
+  const handleUpdateSorting = event => {
+    setSelectedItem(event.target.value);
+  };
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
 
       <Box bgcolor='#EFF0F2' p={2}>
         <Grid container>
@@ -51,7 +56,11 @@ function ImportsPage({ classes }) {
                 </Box>
               </Typography>
 
-              <InputSelect options={sorting} />
+              <InputSelect
+                options={sorting}
+                value={selectedItem}
+                onChangeValue={handleUpdateSorting}
+              />
             </Box>
           </Grid>
         </Grid>
