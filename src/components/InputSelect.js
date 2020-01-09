@@ -16,14 +16,25 @@ const styles = theme => ({
   }
 });
 
-function InputSelect({ classes, options, value, onChangeValue }) {
+function InputSelect({
+  classes,
+  options,
+  value,
+  onChangeValue,
+  getOptionValue,
+  getOptionLabel
+}) {
   return (
     <>
       <FormControl variant='outlined' classes={classes}>
         <Select
           id='demo-simple-select'
           value={value}
-          onChange={event => onChangeValue(event)}
+          onChange={e => {
+            onChangeValue(
+              options.find(item => getOptionValue(item) === e.target.value)
+            );
+          }}
           margin='dense'
           MenuProps={{
             anchorOrigin: {
@@ -39,10 +50,10 @@ function InputSelect({ classes, options, value, onChangeValue }) {
         >
           {options.map(option => (
             <MenuItem
-              key={option.value || option.id}
-              value={option.value || option.id}
+              key={getOptionValue(option)}
+              value={getOptionValue(option)}
             >
-              {option.label || option.name}
+              {getOptionLabel(option)}
             </MenuItem>
           ))}
         </Select>
