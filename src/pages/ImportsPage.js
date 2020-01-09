@@ -9,11 +9,7 @@ import { InputSelect, Button } from "components";
 const styles = theme => ({});
 
 function ImportsPage({ accounts }) {
-  const [selectedItem, setSelectedItem] = useState("");
-
-  const handleUpdateSorting = event => {
-    setSelectedItem(event.target.value);
-  };
+  const [selectedItem, setSelectedItem] = useState(accounts[0]);
 
   return (
     <>
@@ -34,8 +30,13 @@ function ImportsPage({ accounts }) {
 
               <InputSelect
                 options={accounts}
-                value={selectedItem}
-                onChangeValue={handleUpdateSorting}
+                value={selectedItem.id}
+                onChangeValue={item => {
+                  console.log(item);
+                  setSelectedItem(item);
+                }}
+                getOptionValue={item => item.id}
+                getOptionLabel={item => item.name}
               />
             </Box>
           </Grid>

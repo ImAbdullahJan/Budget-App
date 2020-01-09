@@ -1,13 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import _ from "lodash";
-
-import { sortingArray } from "../api/fakeData";
 
 import { Box, Grid, Paper, Typography } from "@material-ui/core";
 
 import { Add } from "@material-ui/icons";
 
 import { Button, InputSearch, InputSelect, AddAccountDialog } from "components";
+
+const sortOptions = [
+  {
+    value: "DefultASC",
+    path: "id",
+    order: "asc",
+    label: "Default"
+  },
+  {
+    value: "NameASC",
+    path: "name",
+    order: "asc",
+    label: "A-Z"
+  },
+  {
+    value: "NameDESC",
+    path: "name",
+    order: "desc",
+    label: "Z-A"
+  },
+  {
+    value: "BalanceASC",
+    path: "balance",
+    order: "asc",
+    label: "Balance (Lowest first)"
+  },
+  {
+    value: "BalanceDESC",
+    path: "balance",
+    order: "desc",
+    label: "Balance (Highest first)"
+  }
+];
 
 function AccountsPage({ accounts, onAddAccount }) {
   // Filter Accounts with search field
@@ -22,37 +53,15 @@ function AccountsPage({ accounts, onAddAccount }) {
       account.name.toLowerCase().indexOf(searchText.toLowerCase()) !== -1
   );
 
-  // Sorting Select field logic
-
-  const [selectedItem, setSelectedItem] = useState("10");
-
-  const handleUpdateSorting = event => {
-    setSelectedItem(event.target.value);
-  };
-
-  const sortItem = sortingArray.find(item => item.value === selectedItem);
-  const [sortColumn, setSortColumn] = useState(sortItem.path);
-  const [sortOrder, setSortOrder] = useState(sortItem.order);
-
-  useEffect(() => {
-    setSortColumn(sortItem.path);
-    setSortOrder(sortItem.order);
-  }, [sortItem]);
-
-  const sortedAccount = _.orderBy(filteredAccount, sortColumn, sortOrder);
+  const [sortItem, setSortedItem] = useState(sortOptions[0]);
+  const sortedAccount = _.orderBy(
+    filteredAccount,
+    sortItem.path,
+    sortItem.order
+  );
 
   // Add Account Dialog box logic
   const [openDialog, setOpenDialog] = useState(false);
-
-  const handleOpenDialog = () => {
-    setOpenDialog(true);
-  };
-
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-  };
-
-  // Filter Accounts Logic
 
   return (
     <>
@@ -71,9 +80,11 @@ function AccountsPage({ accounts, onAddAccount }) {
                 </Box>
               </Typography>
               <InputSelect
-                options={sortingArray}
-                value={selectedItem}
-                onChangeValue={handleUpdateSorting}
+                options={sortOptions}
+                value={sortItem.value}
+                onChangeValue={item => setSortedItem(item)}
+                getOptionValue={item => item.value}
+                getOptionLabel={item => item.label}
               />
             </Box>
           </Grid>
@@ -100,12 +111,12 @@ function AccountsPage({ accounts, onAddAccount }) {
                 color='#00aa70'
                 hover='#00915f'
                 pb={4}
-                onClick={handleOpenDialog}
+                onClick={() => setOpenDialog(true)}
               />
               {openDialog && (
                 <AddAccountDialog
                   openDialog={openDialog}
-                  handleCloseDialog={handleCloseDialog}
+                  handleCloseDialog={() => setOpenDialog(false)}
                   onAddAccount={account => onAddAccount(account)}
                 />
               )}
