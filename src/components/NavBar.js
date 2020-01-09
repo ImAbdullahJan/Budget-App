@@ -29,7 +29,8 @@ const navMenu = [
   { id: 1, name: "Accounts", to: "/accounts" },
   { id: 2, name: "Records", to: "/records" },
   { id: 3, name: "Analytics", to: "/analytics" },
-  { id: 4, name: "Imports", to: "/imports" }
+  { id: 4, name: "Imports", to: "/imports" },
+  { id: 5, name: "Test", to: "/test" }
 ];
 
 const menuList = [

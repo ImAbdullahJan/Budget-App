@@ -14,6 +14,7 @@ import RecordsPage from "./pages/RecordsPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
 import ImportsPage from "./pages/ImportsPage";
 import NoMatchPage from "./pages/NoMatchPage";
+import TestPage from "./pages/TestPage";
 
 function App() {
   const [accounts, setAccounts] = React.useState(accountsData);
@@ -50,6 +51,7 @@ function App() {
                   )}
                 />
                 <Route exact path={`${url}records`} component={RecordsPage} />
+                <Route exact path={`${url}test`} component={TestPage} />
                 <Route
                   exact
                   path={`${url}analytics`}
