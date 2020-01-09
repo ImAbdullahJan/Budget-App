@@ -71,8 +71,8 @@ InputSelect.propTypes = {
   options: PropTypes.array.isRequired,
   value: PropTypes.any.isRequired,
   onChangeValue: PropTypes.func.isRequired,
-  getOptionValue: PropTypes.func.isRequired,
-  getOptionLabel: PropTypes.func.isRequired
+  getOptionValue: PropTypes.any.isRequired,
+  getOptionLabel: PropTypes.any.isRequired
 };
 
 export default withStyles(styles)(InputSelect);
