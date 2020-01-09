@@ -68,9 +68,11 @@ InputSelect.defaultProps = {
 
 InputSelect.propTypes = {
   classes: PropTypes.object,
-  options: PropTypes.array,
+  options: PropTypes.array.isRequired,
   value: PropTypes.any.isRequired,
-  onChangeValue: PropTypes.func.isRequired
+  onChangeValue: PropTypes.func.isRequired,
+  getOptionValue: PropTypes.func.isRequired,
+  getOptionLabel: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(InputSelect);
