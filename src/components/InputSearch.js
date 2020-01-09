@@ -29,7 +29,7 @@ function InputSearch({ classes, value, onChangeValue }) {
       margin='dense'
       placeholder='Search'
       value={value}
-      onChange={event => onChangeValue(event)}
+      onChange={event => onChangeValue(event.target.value)}
       fullWidth
       classes={classes}
       startAdornment={

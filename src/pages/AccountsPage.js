@@ -41,12 +41,7 @@ const sortOptions = [
 ];
 
 function AccountsPage({ accounts, onAddAccount }) {
-  // Filter Accounts with search field
   const [searchText, setSearchText] = useState("");
-
-  const handleSearchText = event => {
-    setSearchText(event.target.value);
-  };
 
   const filteredAccount = accounts.filter(
     account =>
@@ -60,7 +55,6 @@ function AccountsPage({ accounts, onAddAccount }) {
     sortItem.order
   );
 
-  // Add Account Dialog box logic
   const [openDialog, setOpenDialog] = useState(false);
 
   return (
@@ -123,7 +117,7 @@ function AccountsPage({ accounts, onAddAccount }) {
               <Box bgcolor='#ffffff'>
                 <InputSearch
                   value={searchText}
-                  onChangeValue={handleSearchText}
+                  onChangeValue={value => setSearchText(value)}
                 />
               </Box>
             </Box>
