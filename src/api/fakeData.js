@@ -5,19 +5,19 @@ export const accountsData = [
   {
     id: 0,
     icon: <CasinoOutlined style={{ fontSize: "45px" }} />,
-    bgcolor: "#00897B",
+    bgcolor: { value: "#2196f3", label: "Blue" },
     name: "A-Account 1",
-    type: "Cash",
-    currency: "PKR",
+    type: { value: "Cash", label: "Cash" },
+    currency: { value: "PKR", label: "PKR" },
     balance: 10000
   },
   {
     id: 1,
     icon: <CasinoOutlined style={{ fontSize: "45px" }} />,
-    bgcolor: "#4DB6AC",
+    bgcolor: { value: "#4caf50", label: "Green" },
     name: "C-Account 2",
-    type: "General",
-    currency: "PKR",
+    type: { value: "Cash", label: "Cash" },
+    currency: { value: "$", label: "DOLLAR" },
     balance: 1000
   }
 ];
