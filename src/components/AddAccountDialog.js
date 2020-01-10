@@ -1,6 +1,6 @@
 import React from "react";
 import uuidv4 from "uuid/v4";
-import { accountType, SelectColors, SelectCurrency } from "../api/fakeData";
+import { useAppState } from "../contexts/AccountContext";
 
 import {
   withStyles,
@@ -18,6 +18,75 @@ import { Close as CloseIcon, CasinoOutlined } from "@material-ui/icons";
 
 import { InputField, InputSelect, Button } from "components";
 
+const accountType = [
+  {
+    value: "Cash",
+    label: "Cash"
+  },
+  {
+    value: "General",
+    label: "General"
+  },
+  {
+    value: "Bank Account",
+    label: "Bank Account"
+  },
+  {
+    value: "Credit Card",
+    label: "Credit Card"
+  },
+  {
+    value: "Account with Overdraft",
+    label: "Account with Overdraft"
+  }
+];
+
+const SelectColors = [
+  {
+    value: "#f44336",
+    label: "Red"
+  },
+  {
+    value: "#e91e63",
+    label: "Pink"
+  },
+  {
+    value: "#9c27b0",
+    label: "Purple"
+  },
+  {
+    value: "#2196f3",
+    label: "Blue"
+  },
+  {
+    value: "#4caf50",
+    label: "Green"
+  },
+  {
+    value: "#ffeb3b",
+    label: "Yellow"
+  },
+  {
+    value: "#ff9800",
+    label: "Orange"
+  },
+  {
+    value: "#9e9e9e",
+    label: "Grey"
+  }
+];
+
+const SelectCurrency = [
+  {
+    value: "PKR",
+    label: "PKR"
+  },
+  {
+    value: "$",
+    label: "DOLLAR"
+  }
+];
+
 const styles = theme => ({
   closeButton: {
     position: "absolute",
@@ -27,35 +96,35 @@ const styles = theme => ({
   }
 });
 
-function AddAccountDialog({
-  classes,
-  openDialog,
-  handleCloseDialog,
-  onAddAccount
-}) {
+function AddAccountDialog({ classes, openDialog, handleCloseDialog }) {
+  const { dispatch } = useAppState();
+
   const [state, setState] = React.useState({
     id: "",
     icon: <CasinoOutlined style={{ fontSize: "45px" }} />,
-    bgcolor: "#f44336",
+    bgcolor: { value: "#f44336", label: "Red" },
     name: "",
-    type: "Cash",
-    currency: "PKR",
+    type: { value: "Cash", label: "Cash" },
+    currency: { value: "PKR", label: "PKR" },
     balance: ""
   });
 
-  const handleChange = prop => event => {
-    setState({ ...state, id: uuidv4(), [prop]: event.target.value });
+  const handleChange = prop => value => {
+    setState({ ...state, id: uuidv4(), [prop]: value });
   };
 
   const handleSave = data => {
-    onAddAccount(data);
+    dispatch({
+      type: "ADD_ACCOUNT",
+      payload: data
+    });
     setState({
       id: "",
       icon: <CasinoOutlined style={{ fontSize: "45px" }} />,
-      bgcolor: "#f44336",
+      bgcolor: { value: "#f44336", label: "Red" },
       name: "",
-      type: "Cash",
-      currency: "PKR",
+      type: { value: "Cash", label: "Cash" },
+      currency: { value: "PKR", label: "PKR" },
       balance: ""
     });
     handleCloseDialog();
@@ -109,8 +178,10 @@ function AddAccountDialog({
               <InputSelect
                 options={SelectColors}
                 width={100}
-                value={state.bgcolor}
+                value={state.bgcolor.value}
                 onChangeValue={handleChange("bgcolor")}
+                getOptionValue={item => item.value}
+                getOptionLabel={item => item.label}
               />
             </Box>
           </Box>
@@ -124,8 +195,10 @@ function AddAccountDialog({
             <InputSelect
               options={accountType}
               width={400}
-              value={state.type}
+              value={state.type.value}
               onChangeValue={handleChange("type")}
+              getOptionValue={item => item.value}
+              getOptionLabel={item => item.label}
             />
           </Box>
 
@@ -151,8 +224,10 @@ function AddAccountDialog({
               <InputSelect
                 options={SelectCurrency}
                 width={100}
-                value={state.currency}
+                value={state.currency.value}
                 onChangeValue={handleChange("currency")}
+                getOptionValue={item => item.value}
+                getOptionLabel={item => item.label}
               />
             </Box>
           </Box>

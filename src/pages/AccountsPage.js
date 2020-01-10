@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import _ from "lodash";
+import { useAppState } from "../contexts/AccountContext";
 
 import { Box, Grid, Paper, Typography } from "@material-ui/core";
 
@@ -40,7 +41,9 @@ const sortOptions = [
   }
 ];
 
-function AccountsPage({ accounts, onAddAccount }) {
+function AccountsPage() {
+  const { accounts } = useAppState();
+
   const [searchText, setSearchText] = useState("");
 
   const filteredAccount = accounts.filter(
@@ -111,7 +114,6 @@ function AccountsPage({ accounts, onAddAccount }) {
                 <AddAccountDialog
                   openDialog={openDialog}
                   handleCloseDialog={() => setOpenDialog(false)}
-                  onAddAccount={account => onAddAccount(account)}
                 />
               )}
               <Box bgcolor='#ffffff'>
@@ -130,7 +132,7 @@ function AccountsPage({ accounts, onAddAccount }) {
                   <Grid container alignItems='center'>
                     <Grid item style={{ lineHeight: 0 }}>
                       <Box
-                        bgcolor={item.bgcolor}
+                        bgcolor={item.bgcolor.value}
                         color='white'
                         borderRadius={5}
                       >
@@ -153,7 +155,7 @@ function AccountsPage({ accounts, onAddAccount }) {
                         color='textSecondary'
                       >
                         <Box fontSize={15} fontWeight='fontWeightMedium'>
-                          {item.type}
+                          {item.type.value}
                         </Box>
                       </Typography>
                     </Grid>
@@ -161,7 +163,7 @@ function AccountsPage({ accounts, onAddAccount }) {
                     <Grid item xs={4}>
                       <Typography variant='body1' component='div'>
                         <Box fontSize={18} fontWeight={500} textAlign='right'>
-                          {item.currency} {item.balance}
+                          {item.currency.value} {item.balance}
                         </Box>
                       </Typography>
                     </Grid>

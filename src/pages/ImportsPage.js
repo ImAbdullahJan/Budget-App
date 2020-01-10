@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useAppState } from "../contexts/AccountContext";
 
 import { withStyles, Box, Grid, Typography } from "@material-ui/core";
 
@@ -8,7 +9,8 @@ import { InputSelect, Button } from "components";
 
 const styles = theme => ({});
 
-function ImportsPage({ accounts }) {
+function ImportsPage() {
+  const { accounts } = useAppState();
   const [selectedItem, setSelectedItem] = useState(accounts[0]);
 
   return (
@@ -31,10 +33,7 @@ function ImportsPage({ accounts }) {
               <InputSelect
                 options={accounts}
                 value={selectedItem.id}
-                onChangeValue={item => {
-                  console.log(item);
-                  setSelectedItem(item);
-                }}
+                onChangeValue={item => setSelectedItem(item)}
                 getOptionValue={item => item.id}
                 getOptionLabel={item => item.name}
               />
