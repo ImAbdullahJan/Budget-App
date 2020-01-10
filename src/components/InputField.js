@@ -33,7 +33,7 @@ function InputField({
         variant='outlined'
         className={classes.textField}
         value={value}
-        onChange={event => onChangeValue(event)}
+        onChange={event => onChangeValue(event.target.value)}
       />
     </Box>
   );
