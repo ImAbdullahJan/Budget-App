@@ -97,7 +97,7 @@ const styles = theme => ({
 });
 
 function AddAccountDialog({ classes, openDialog, handleCloseDialog }) {
-  const { dispatch } = useAppState();
+  const [, dispatch] = useAppState();
 
   const [state, setState] = React.useState({
     id: "",
@@ -118,15 +118,7 @@ function AddAccountDialog({ classes, openDialog, handleCloseDialog }) {
       type: "ADD_ACCOUNT",
       payload: data
     });
-    setState({
-      id: "",
-      icon: <CasinoOutlined style={{ fontSize: "45px" }} />,
-      bgcolor: { value: "#f44336", label: "Red" },
-      name: "",
-      type: { value: "Cash", label: "Cash" },
-      currency: { value: "PKR", label: "PKR" },
-      balance: ""
-    });
+
     handleCloseDialog();
   };
 

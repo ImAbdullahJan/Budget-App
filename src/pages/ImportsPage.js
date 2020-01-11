@@ -10,7 +10,7 @@ import { InputSelect, Button } from "components";
 const styles = theme => ({});
 
 function ImportsPage() {
-  const { accounts } = useAppState();
+  const [{ accounts }] = useAppState();
   const [selectedItem, setSelectedItem] = useState(accounts[0]);
 
   return (

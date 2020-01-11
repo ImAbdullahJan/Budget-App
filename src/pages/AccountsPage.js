@@ -42,7 +42,7 @@ const sortOptions = [
 ];
 
 function AccountsPage() {
-  const { accounts } = useAppState();
+  const [{ accounts }] = useAppState();
 
   const [searchText, setSearchText] = useState("");
 

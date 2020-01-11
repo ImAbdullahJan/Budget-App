@@ -10,17 +10,9 @@ const initialState = {
   accounts: accountsData
 };
 
-export const AppContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const contextValue = {
-    accounts: state.accounts,
-    dispatch
-  };
-  return (
-    <AccountContext.Provider value={contextValue}>
-      {children}
-    </AccountContext.Provider>
-  );
-};
-
+export const AppContextProvider = ({ children }) => (
+  <AccountContext.Provider value={useReducer(reducer, initialState)}>
+    {children}
+  </AccountContext.Provider>
+);
 export const useAppState = () => useContext(AccountContext);
