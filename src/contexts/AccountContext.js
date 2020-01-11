@@ -10,10 +10,4 @@ export const AppContextProvider = ({ children }) => (
     {children}
   </AccountContext.Provider>
 );
-
-export const AppContextProvider = ({ children }) => (
-  <AccountContext.Provider value={useReducer(reducer, initialState)}>
-    {children}
-  </AccountContext.Provider>
-);
 export const useAppState = () => useContext(AccountContext);
