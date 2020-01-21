@@ -1,13 +1,18 @@
-import React, { useContext, useReducer } from "react";
-import reducer, { initialState } from "./reducer";
+import React, { createContext, useContext, useReducer } from "react";
+import PropTypes from "prop-types";
 
-const AccountContext = React.createContext();
+export const StateContext = createContext();
 
-export default AccountContext;
-
-export const AppContextProvider = ({ children }) => (
-  <AccountContext.Provider value={useReducer(reducer, initialState)}>
+export const StateProvider = ({ reducer, initialState, children }) => (
+  <StateContext.Provider value={useReducer(reducer, initialState)}>
     {children}
-  </AccountContext.Provider>
+  </StateContext.Provider>
 );
-export const useAppState = () => useContext(AccountContext);
+
+StateContext.propTypes = {
+  reducer: PropTypes.func.isRequired,
+  initialState: PropTypes.shape({}).isRequired,
+  children: PropTypes.node.isRequired
+};
+
+export const useAppState = () => useContext(StateContext);

@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { AppContextProvider } from "./contexts/AccountContext";
+import { StateProvider } from "./contexts/AccountContext";
+import reducer, { initialState } from "./contexts/reducer";
 
 import { CssBaseline } from "@material-ui/core";
 
@@ -19,7 +20,7 @@ import TestPage from "./pages/TestPage";
 function App() {
   return (
     <>
-      <AppContextProvider>
+      <StateProvider initialState={initialState} reducer={reducer}>
         <CssBaseline />
         <Switch>
           <Route exact path='/login' component={LoginPage} />
@@ -58,7 +59,7 @@ function App() {
             )}
           />
         </Switch>
-      </AppContextProvider>
+      </StateProvider>
     </>
   );
 }
