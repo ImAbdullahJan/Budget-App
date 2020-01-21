@@ -146,19 +146,17 @@ function TestPage({ classes }) {
         options={books}
         getOptionLabel={option => option}
         renderOption={option => {
-          {
-            if (books[books.length - 1] === option) {
-              return (
-                <Typography ref={lastElementRef}>
-                  {option}{" "}
-                  {loading ? (
-                    <CircularProgress color='inherit' size={20} />
-                  ) : null}
-                </Typography>
-              );
-            } else {
-              return <Typography>{option}</Typography>;
-            }
+          if (books[books.length - 1] === option) {
+            return (
+              <Typography ref={lastElementRef}>
+                {option}{" "}
+                {loading ? (
+                  <CircularProgress color='inherit' size={20} />
+                ) : null}
+              </Typography>
+            );
+          } else {
+            return <Typography>{option}</Typography>;
           }
         }}
         style={{ width: 300 }}
