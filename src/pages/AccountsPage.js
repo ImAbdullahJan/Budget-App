@@ -49,6 +49,47 @@ const sortOptions = [
   }
 ];
 
+const AccountsPageLeftPanel = ({
+  setOpenDialog,
+  openDialog,
+  searchText,
+  setSearchText
+}) => {
+  return (
+    <Box bgcolor='#FAFBFC' height='490px' borderRadius={5} px={3} py={4}>
+      <Typography variant='h5' component='div'>
+        <Box fontWeight='fontWeightBold' mb={3}>
+          Accounts
+        </Box>
+      </Typography>
+
+      <Button
+        text='Add'
+        icon={<Add fontSize='large' />}
+        fullWidth
+        color='#00aa70'
+        hover='#00915f'
+        pb={4}
+        onClick={() => setOpenDialog(true)}
+      />
+      {openDialog && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <AddAccountDialog
+            openDialog={openDialog}
+            handleCloseDialog={() => setOpenDialog(false)}
+          />
+        </Suspense>
+      )}
+      <Box bgcolor='#ffffff'>
+        <InputSearch
+          value={searchText}
+          onChangeValue={value => setSearchText(value)}
+        />
+      </Box>
+    </Box>
+  );
+};
+
 function AccountsPage({ accounts, fetchAccounts }) {
   useEffect(() => {
     fetchAccounts();
@@ -107,45 +148,20 @@ function AccountsPage({ accounts, fetchAccounts }) {
               getOptionLabel={item => item.label}
             />
           </Box>
+
           <Box
-            bgcolor='#FAFBFC'
-            height='490px'
-            borderRadius={5}
-            px={3}
-            py={4}
             key='b'
             data-grid={{ i: "b", x: 0, y: 1, w: 3, h: 10 }}
+            component='span'
           >
-            <Typography variant='h5' component='div'>
-              <Box fontWeight='fontWeightBold' mb={3}>
-                Accounts
-              </Box>
-            </Typography>
-
-            <Button
-              text='Add'
-              icon={<Add fontSize='large' />}
-              fullWidth
-              color='#00aa70'
-              hover='#00915f'
-              pb={4}
-              onClick={() => setOpenDialog(true)}
+            <AccountsPageLeftPanel
+              openDialog={openDialog}
+              setOpenDialog={setOpenDialog}
+              searchText={searchText}
+              setSearchText={setSearchText}
             />
-            {openDialog && (
-              <Suspense fallback={<div>Loading...</div>}>
-                <AddAccountDialog
-                  openDialog={openDialog}
-                  handleCloseDialog={() => setOpenDialog(false)}
-                />
-              </Suspense>
-            )}
-            <Box bgcolor='#ffffff'>
-              <InputSearch
-                value={searchText}
-                onChangeValue={value => setSearchText(value)}
-              />
-            </Box>
           </Box>
+
           <Box key='c' data-grid={{ i: "c", x: 3, y: 1, w: 9, h: 10 }}>
             {sortedAccount.map(item => (
               <Box borderRadius={5} mb={2} key={item.id}>
