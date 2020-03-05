@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useCallback, lazy, Suspense } from "react";
 import _ from "lodash";
+import { Responsive, WidthProvider } from "react-grid-layout";
+import "../../node_modules/react-grid-layout/css/styles.css";
+import "../../node_modules/react-resizable/css/styles.css";
+
 import { useAppState } from "../contexts/AccountContext";
 import { accountsData } from "../api/fakeData";
 import { Box, Grid, Paper, Typography } from "@material-ui/core";
@@ -9,6 +13,8 @@ import { Add } from "@material-ui/icons";
 import { Button, InputSearch, InputSelect } from "components";
 
 const AddAccountDialog = lazy(() => import("../components/AddAccountDialog"));
+
+const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const sortOptions = [
   {
@@ -66,72 +72,81 @@ function AccountsPage({ accounts, fetchAccounts }) {
 
   return (
     <>
-      <Box bgcolor='#EFF0F2' p={2}>
-        <Grid container>
-          <Grid item xs={12}>
-            <Box
-              display='flex'
-              justifyContent='center'
-              alignItems='center'
-              mb={2}
-            >
-              <Typography variant='body1' component='div'>
-                <Box fontWeight='normal' mr={3}>
-                  Sort by
-                </Box>
-              </Typography>
-              <InputSelect
-                options={sortOptions}
-                value={sortItem.value}
-                onChangeValue={item => setSortedItem(item)}
-                getOptionValue={item => item.value}
-                getOptionLabel={item => item.label}
-              />
-            </Box>
-          </Grid>
-        </Grid>
-        <Grid container spacing={2}>
-          <Grid item xs={3}>
-            <Box
-              bgcolor='#FAFBFC'
-              height='490px'
-              borderRadius={5}
-              px={3}
-              py={4}
-            >
-              <Typography variant='h5' component='div'>
-                <Box fontWeight='fontWeightBold' mb={3}>
-                  Accounts
-                </Box>
-              </Typography>
-
-              <Button
-                text='Add'
-                icon={<Add fontSize='large' />}
-                fullWidth
-                color='#00aa70'
-                hover='#00915f'
-                pb={4}
-                onClick={() => setOpenDialog(true)}
-              />
-              {openDialog && (
-                <Suspense fallback={<div>Loading...</div>}>
-                  <AddAccountDialog
-                    openDialog={openDialog}
-                    handleCloseDialog={() => setOpenDialog(false)}
-                  />
-                </Suspense>
-              )}
-              <Box bgcolor='#ffffff'>
-                <InputSearch
-                  value={searchText}
-                  onChangeValue={value => setSearchText(value)}
-                />
+      <Box bgcolor='#EFF0F2' p={2} style={{ height: "inherit" }}>
+        <ResponsiveReactGridLayout
+          className='layout'
+          breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+          cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+          rowHeight={40}
+          margin={[10, 10]}
+          isDraggable={false}
+          isResizable={false}
+          compactType={"vertical"}
+          preventCollision={false}
+          measureBeforeMount={false}
+          useCSSTransforms={true}
+        >
+          <Box
+            display='flex'
+            justifyContent='center'
+            alignItems='center'
+            mb={2}
+            key='a'
+            data-grid={{ i: "a", x: 0, y: 0, w: 12, h: 1 }}
+          >
+            <Typography variant='body1' component='div'>
+              <Box fontWeight='normal' mr={3}>
+                Sort by
               </Box>
-            </Box>
-          </Grid>
+            </Typography>
+            <InputSelect
+              options={sortOptions}
+              value={sortItem.value}
+              onChangeValue={item => setSortedItem(item)}
+              getOptionValue={item => item.value}
+              getOptionLabel={item => item.label}
+            />
+          </Box>
+          <Box
+            bgcolor='#FAFBFC'
+            height='490px'
+            borderRadius={5}
+            px={3}
+            py={4}
+            key='b'
+            data-grid={{ i: "b", x: 0, y: 1, w: 3, h: 10 }}
+          >
+            <Typography variant='h5' component='div'>
+              <Box fontWeight='fontWeightBold' mb={3}>
+                Accounts
+              </Box>
+            </Typography>
 
-          <Grid item xs={9}>
+            <Button
+              text='Add'
+              icon={<Add fontSize='large' />}
+              fullWidth
+              color='#00aa70'
+              hover='#00915f'
+              pb={4}
+              onClick={() => setOpenDialog(true)}
+            />
+            {openDialog && (
+              <Suspense fallback={<div>Loading...</div>}>
+                <AddAccountDialog
+                  openDialog={openDialog}
+                  handleCloseDialog={() => setOpenDialog(false)}
+                />
+              </Suspense>
+            )}
+            <Box bgcolor='#ffffff'>
+              <InputSearch
+                value={searchText}
+                onChangeValue={value => setSearchText(value)}
+              />
+            </Box>
+          </Box>
+          <Box key='c' data-grid={{ i: "c", x: 3, y: 1, w: 9, h: 10 }}>
             {sortedAccount.map(item => (
               <Box borderRadius={5} mb={2} key={item.id}>
                 <Paper style={{ padding: 15 }} elevation={0}>
@@ -177,8 +192,8 @@ function AccountsPage({ accounts, fetchAccounts }) {
                 </Paper>
               </Box>
             ))}
-          </Grid>
-        </Grid>
+          </Box>
+        </ResponsiveReactGridLayout>
       </Box>
     </>
   );
