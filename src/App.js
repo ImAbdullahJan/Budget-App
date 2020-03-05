@@ -22,9 +22,13 @@ import ImportsPage from "./pages/ImportsPage";
 import NoMatchPage from "./pages/NoMatchPage";
 import TestPage from "./pages/TestPage";
 
+import EditLayoutButton from "./components/EditLayoutButton";
+
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 function App() {
+  const [editLayout, setEditLayout] = React.useState(false);
+
   const browserHeight = window.innerHeight;
 
   return (
@@ -105,6 +109,10 @@ function App() {
             )}
           />
         </Switch>
+        <EditLayoutButton
+          editLayout={editLayout}
+          onEditLayout={() => setEditLayout(!editLayout)}
+        />
       </StateProvider>
     </>
   );
