@@ -110,6 +110,9 @@ function App() {
           />
         </Switch>
         <EditLayoutButton
+          bottom={10}
+          right={10}
+          size={"medium"}
           editLayout={editLayout}
           onEditLayout={() => setEditLayout(!editLayout)}
         />
