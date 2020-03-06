@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, lazy, Suspense } from "react";
 import _ from "lodash";
-import { Responsive, WidthProvider } from "react-grid-layout";
+import GridLayout, { Responsive, WidthProvider } from "react-grid-layout";
 import "../../node_modules/react-grid-layout/css/styles.css";
 import "../../node_modules/react-resizable/css/styles.css";
 
@@ -16,6 +16,7 @@ import EditLayoutButton from "../components/EditLayoutButton";
 const AddAccountDialog = lazy(() => import("../components/AddAccountDialog"));
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
+const ReactGridLayout = WidthProvider(GridLayout);
 
 const sortOptions = [
   {
@@ -54,25 +55,63 @@ const AccountsPageLeftPanel = ({
   setOpenDialog,
   openDialog,
   searchText,
-  setSearchText
+  setSearchText,
+  isDraggable,
+  isResizable,
+  editLayout,
+  onEditLayout
 }) => {
   return (
     <Box bgcolor='#FAFBFC' height='490px' borderRadius={5} px={3} py={4}>
-      <Typography variant='h5' component='div'>
-        <Box fontWeight='fontWeightBold' mb={3}>
-          Accounts
-        </Box>
-      </Typography>
+      <ReactGridLayout
+        className='layout'
+        cols={12}
+        rowHeight={20}
+        isDraggable={isDraggable}
+        isResizable={isResizable}
+        compactType={"vertical"}
+        preventCollision={false}
+      >
+        <Typography
+          key={"accounts"}
+          data-grid={{ i: "accounts", x: 0, y: 0, w: 12, h: 2 }}
+          variant='h5'
+          component='div'
+        >
+          <Box fontWeight='fontWeightBold' mb={3}>
+            Accounts
+          </Box>
+        </Typography>
 
-      <Button
-        text='Add'
-        icon={<Add fontSize='large' />}
-        fullWidth
-        color='#00aa70'
-        hover='#00915f'
-        pb={4}
-        onClick={() => setOpenDialog(true)}
-      />
+        <Box
+          key={"addAccountButton"}
+          data-grid={{ i: "addAccountButton", x: 0, y: 2, w: 12, h: 2 }}
+          mb={30}
+        >
+          <Button
+            text='Add'
+            icon={<Add fontSize='large' />}
+            fullWidth
+            color='#00aa70'
+            hover='#00915f'
+            pb={4}
+            onClick={() => setOpenDialog(true)}
+          />
+        </Box>
+
+        <Box
+          key={"inputSearch"}
+          data-grid={{ i: "inputSearch", x: 0, y: 5, w: 12, h: 2 }}
+        >
+          <Box bgcolor='#ffffff'>
+            <InputSearch
+              value={searchText}
+              onChangeValue={value => setSearchText(value)}
+            />
+          </Box>
+        </Box>
+      </ReactGridLayout>
+
       {openDialog && (
         <Suspense fallback={<div>Loading...</div>}>
           <AddAccountDialog
@@ -81,12 +120,14 @@ const AccountsPageLeftPanel = ({
           />
         </Suspense>
       )}
-      <Box bgcolor='#ffffff'>
-        <InputSearch
-          value={searchText}
-          onChangeValue={value => setSearchText(value)}
-        />
-      </Box>
+
+      <EditLayoutButton
+        top={10}
+        right={10}
+        size={"small"}
+        editLayout={editLayout}
+        onEditLayout={onEditLayout}
+      />
     </Box>
   );
 };
@@ -168,6 +209,10 @@ function AccountsPage({ accounts, fetchAccounts }) {
               setOpenDialog={setOpenDialog}
               searchText={searchText}
               setSearchText={setSearchText}
+              isDraggable={elementInEditMode === "leftPanel"}
+              isResizable={elementInEditMode === "leftPanel"}
+              editLayout={elementInEditMode === "leftPanel"}
+              onEditLayout={() => handleElementEditing("leftPanel")}
             />
           </Box>
 
