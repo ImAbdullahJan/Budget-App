@@ -18,10 +18,17 @@ export default function EditLayoutButton(props) {
   const classes = useStyles(props);
   const { editLayout, onEditLayout, size } = props;
 
+  const [buttonColor, setButtonColor] = useState("secondary");
+
+  useEffect(() => {
+    setButtonColor(!editLayout ? "secondary" : "primary");
+  }, [editLayout]);
+
   return (
     <div className={classes.root}>
       <Fab
         size={size}
+        color={buttonColor}
         aria-label='edit'
         onClick={onEditLayout}
       >
