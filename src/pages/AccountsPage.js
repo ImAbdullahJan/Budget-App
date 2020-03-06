@@ -11,6 +11,7 @@ import { Box, Grid, Paper, Typography } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 
 import { Button, InputSearch, InputSelect } from "components";
+import EditLayoutButton from "../components/EditLayoutButton";
 
 const AddAccountDialog = lazy(() => import("../components/AddAccountDialog"));
 
@@ -91,6 +92,14 @@ const AccountsPageLeftPanel = ({
 };
 
 function AccountsPage({ accounts, fetchAccounts }) {
+  const [elementInEditMode, setElementInEditMode] = useState("");
+
+  const handleElementEditing = element => {
+    setElementInEditMode(prevState => (prevState === element ? "" : element));
+  };
+
+  console.log(elementInEditMode);
+
   useEffect(() => {
     fetchAccounts();
   }, []);
@@ -120,8 +129,8 @@ function AccountsPage({ accounts, fetchAccounts }) {
           cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
           rowHeight={40}
           margin={[10, 10]}
-          isDraggable={false}
-          isResizable={false}
+          isDraggable={elementInEditMode === "contentArea"}
+          isResizable={elementInEditMode === "contentArea"}
           compactType={"vertical"}
           preventCollision={false}
           measureBeforeMount={false}
@@ -210,6 +219,13 @@ function AccountsPage({ accounts, fetchAccounts }) {
             ))}
           </Box>
         </ResponsiveReactGridLayout>
+        <EditLayoutButton
+          top={10}
+          right={10}
+          size={"small"}
+          editLayout={elementInEditMode === "contentArea"}
+          onEditLayout={() => handleElementEditing("contentArea")}
+        />
       </Box>
     </>
   );
